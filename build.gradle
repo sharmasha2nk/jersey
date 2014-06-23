@@ -1,0 +1,36 @@
+apply plugin: 'war'
+apply plugin: 'jetty'
+apply plugin: 'eclipse'
+
+httpPort = 8887 
+stopPort = 8081
+stopKey = 'stopKey'
+
+sourceCompatibility = 1.7
+version = '1.0'
+jar {
+    manifest {
+        attributes 'Implementation-Title': 'Jersey Quickstart', 'Implementation-Version': version
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+List testLibraries=['junit:junit:4.10']
+
+dependencies{
+	compile 'com.sun.jersey:jersey-server:1.16'
+	compile 'com.sun.jersey:jersey-json:1.16'
+
+	testCompile testLibraries
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'repos'
+       }
+    }
+}
